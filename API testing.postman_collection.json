@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "24474467-5e3c-403c-85e7-079069ee53df",
+		"name": "API testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25011708"
+	},
+	"item": [
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"anna2023\",\r\n  \"email\": \"anna2023@mail.ru\",\r\n  \"username\": \"anna2023\",\r\n  \"password\": \"12345678\",\r\n  \"role_id\": 2,\r\n  \"account\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/register/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"register",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login/Get token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var res = JSON.parse(responseBody);\r",
+							"{\r",
+							"pm.environment.set(\"token\", res.token);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anna2023",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/login/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"login",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get advanced course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/courses/advanced/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"courses",
+						"advanced",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get fundamental courses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/courses/fundamental/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"courses",
+						"fundamental",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"string587\",\r\n  \"body\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/course/98576085/update/",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"course",
+						"98576085",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/courses/course/98576108",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"courses",
+						"course",
+						"98576108"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
